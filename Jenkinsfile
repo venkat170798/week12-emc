@@ -28,7 +28,7 @@ stage('SonarQube Analysis') {
             sonar-scanner \
             -Dsonar.projectKey=sample-app \
             -Dsonar.sources=. \
-            -Dsonar.host.url=http://<your-ec2-ip>:9000
+            -Dsonar.host.url=http://65.0.178.193:9000
             '''
         }
     }
