@@ -2,41 +2,38 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "yourdockerhubusername/sample-app"
-    }
-
-    tools {
-        sonarQube 'SonarQube'
+        DOCKER_IMAGE = "venkat170798/sample-app"
     }
 
     stages {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-username/sample-app.git'
+                git 'https://github.com/venkat170798/week12-emc.git'
             }
         }
 
         stage('Build & Test') {
             steps {
                 sh 'pip install -r requirements.txt'
+                sh 'pip install pytest'
                 sh 'pytest'
             }
         }
 
         stage('SonarQube Analysis') {
-    steps {
-        withSonarQubeEnv('SonarQube') {
-            sh '''
-            sonar-scanner \
-            -Dsonar.projectKey=sample-app \
-            -Dsonar.sources=. \
-            -Dsonar.host.url=http://<your-ip>:9000 \
-            -Dsonar.login=$SONAR_AUTH_TOKEN
-            '''
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh '''
+                    sonar-scanner \
+                    -Dsonar.projectKey=sample-app \
+                    -Dsonar.sources=. \
+                    -Dsonar.host.url=http://<your-ip>:9000 \
+                    -Dsonar.login=$SONAR_AUTH_TOKEN
+                    '''
+                }
+            }
         }
-    }
-}
 
         stage('Quality Gate') {
             steps {
