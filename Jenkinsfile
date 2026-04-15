@@ -9,13 +9,17 @@ pipeline {
 
 
 
-        stage('Build & Test') {
-            steps {
-                sh 'pip3 install -r requirements.txt'
-                sh 'pip3 install pytest'
-                sh 'pytest'
-            }
-        }
+       stage('Build & Test') {
+    steps {
+        sh '''
+        python3 -m venv venv
+        . venv/bin/activate
+        pip install -r requirements.txt
+        pip install pytest
+        pytest
+        '''
+    }
+}
 
         stage('SonarQube Analysis') {
             steps {
