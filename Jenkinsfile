@@ -24,12 +24,15 @@ pipeline {
 stage('SonarQube Analysis') {
     steps {
         withSonarQubeEnv('SonarQube') {
-            sh '''
-            sonar-scanner \
-            -Dsonar.projectKey=sample-app \
-            -Dsonar.sources=. \
-            -Dsonar.host.url=http://65.0.178.193:9000
-            '''
+            script {
+                def scannerHome = tool 'SonarScanner'
+                sh """
+                ${scannerHome}/bin/sonar-scanner \
+                -Dsonar.projectKey=sample-app \
+                -Dsonar.sources=. \
+                -Dsonar.host.url=http://65.0.178.193:9000
+                """
+            }
         }
     }
 }
