@@ -7,11 +7,7 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/venkat170798/week12-emc.git'
-            }
-        }
+
 
         stage('Build & Test') {
             steps {
