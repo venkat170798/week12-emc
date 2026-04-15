@@ -30,7 +30,8 @@ stage('SonarQube Analysis') {
                 ${scannerHome}/bin/sonar-scanner \
                 -Dsonar.projectKey=sample-app \
                 -Dsonar.sources=. \
-                -Dsonar.host.url=http://65.0.178.193:9000
+                -Dsonar.host.url=http://65.0.178.193:9000 \
+                -Dsonar.exclusions=venv/**
                 """
             }
         }
@@ -38,12 +39,12 @@ stage('SonarQube Analysis') {
 }
 
         stage('Quality Gate') {
-            steps {
-                timeout(time: 2, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
+    steps {
+        timeout(time: 1, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
         }
+    }
+}
 
         stage('Docker Build') {
             steps {
