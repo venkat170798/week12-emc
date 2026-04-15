@@ -21,19 +21,18 @@ pipeline {
     }
 }
 
-        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh '''
-                    sonar-scanner \
-                    -Dsonar.projectKey=sample-app \
-                    -Dsonar.sources=. \
-                    -Dsonar.host.url=http://<your-ip>:9000 \
-                    -Dsonar.login=$SONAR_AUTH_TOKEN
-                    '''
-                }
-            }
+stage('SonarQube Analysis') {
+    steps {
+        withSonarQubeEnv('SonarQube') {
+            sh '''
+            sonar-scanner \
+            -Dsonar.projectKey=sample-app \
+            -Dsonar.sources=. \
+            -Dsonar.host.url=http://<your-ec2-ip>:9000
+            '''
         }
+    }
+}
 
         stage('Quality Gate') {
             steps {
