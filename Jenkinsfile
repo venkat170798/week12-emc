@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "venkat170798/sample-app"
+        
     }
 
     stages {
