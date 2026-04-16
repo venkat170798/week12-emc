@@ -30,7 +30,7 @@ stage('SonarQube Analysis') {
                 ${scannerHome}/bin/sonar-scanner \
                 -Dsonar.projectKey=sample-app \
                 -Dsonar.sources=. \
-                -Dsonar.host.url=http://65.0.178.193:9000 \
+                -Dsonar.host.url=http://3.110.154.249:9000 \
                 -Dsonar.exclusions=venv/**
                 """
             }
