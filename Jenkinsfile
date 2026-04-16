@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "venkat170798/sample-app"
+        DOCKER_IMAGE = "venkatr271/sample-app"
         
     }
 
